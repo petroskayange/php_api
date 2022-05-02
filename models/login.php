@@ -100,6 +100,25 @@
 
          
     }
+    public function read_single_username() {
+      // Create query
+      $query = 'SELECT * FROM ' . $this->table . ' WHERE username = ? ';
+
+                                
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+      
+      // Bind ID
+      $stmt->bindParam(1, $this->username);
+      // Execute query
+      $stmt->execute();
+      if($stmt->fetch(PDO::FETCH_ASSOC) != "") {
+        return false;
+      }
+
+      return true;
+}
     function console_log($message) {
       $STDERR = fopen("php://stderr", "w");
                 fwrite($STDERR, "\n".$message."\n\n");

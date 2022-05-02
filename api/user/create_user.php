@@ -32,34 +32,42 @@
   $login = new Login($db);
 
   // Get raw posted data
- 
   $login->username = $_POST['username'];
   $login->password = $_POST['password'];
   $login->role = $_POST['role'];
+  $user->Email = $_POST['Email'];
 
-  $loginID = $login->createLogin();
-  $loginID = $login->getLoginId();
+  if($login->read_single_username())
+  {
+    if($user->read_single_email() ){
+      $loginID = $login->createLogin();
+      $loginID = $login->getLoginId();
 
-  console_log($loginID);
-  // Create payment
-    if($loginID) {
-      $user->firstName = $_POST['firstName'];
-      $user->LastName = $_POST['LastName'];
-      $user->Email = $_POST['Email'];
-      $user->Address = $_POST['Address'];
-      $user->Contact = $_POST['Contact'];
-      $user->loginID = $loginID;
-      if($user->createUser()){
+      console_log($loginID);
+      // Create payment
+        if($loginID) {
+          $user->firstName = $_POST['firstName'];
+          $user->LastName = $_POST['LastName'];
+          $user->Address = $_POST['Address'];
+          $user->Contact = $_POST['Contact'];
+          $user->loginID = $loginID;
+          if($user->createUser()){
 
-      }else
-      header('HTTP/1.1 400 Fail to create payment', true, 400);
-      
-    }else{
-        echo json_encode(
-            array('message' => 'Post Not Created')
-          );
+          }else
           header('HTTP/1.1 400 Fail to create payment', true, 400);
+          
+        }else{
+            echo json_encode(
+                array('message' => 'Post Not Created')
+              );
+              header('HTTP/1.1 400 Fail to create payment', true, 400);
+        }
+    }else{
+      header('HTTP/1.1 500 Email already exit', true, 500);
     }
+  }else{
+    header('HTTP/1.1 501 Username already exit', true, 501);
+  }
 }else
 header('HTTP/1.1 422 Invalid Data', true, 422);
 

@@ -4,49 +4,52 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Post.php';
+  include_once '../../models/Payment.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $post = new Post($db);
+  $Payment = new Payment($db);
 
-  // Blog post query
-  $result = $post->read();
+  // Blog Payment query
+  $result = $Payment->read();
   // Get row count
   $num = $result->rowCount();
 
-  // Check if any posts
+  // Check if any Payments
   if($num > 0) {
-    // Post array
-    $posts_arr = array();
-    // $posts_arr['data'] = array();
+    // Payment array
+    $Payments_arr = array();
+    // $Payments_arr['data'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
 
-      $post_item = array(
-        'id' => $id,
-        'title' => $title,
-        'body' => html_entity_decode($body),
-        'author' => $author,
-        'category_id' => $category_id,
-        'category_name' => $category_name
+      $Payment_item = array(
+        'paymentID' => $paymentID,
+        'referenceNumber' => $referenceNumber,
+        'amount' => $amount,
+        'date' => $date,
+        'type' => $type,
+        'userID' => $userID,
+        'paymentMethod' => $paymentMethod,
+        'paymentAt' => $paymentAt,
+        'status' => $status
       );
 
       // Push to "data"
-      array_push($posts_arr, $post_item);
-      // array_push($posts_arr['data'], $post_item);
+      array_push($Payments_arr, $Payment_item);
+      // array_push($Parcels_arr['data'], $Parcel_item);
     }
 
     // Turn to JSON & output
-    echo json_encode($posts_arr);
+    print_r(json_encode($Payments_arr));
 
   } else {
-    // No Posts
+    // No Parcels
     echo json_encode(
-      array('message' => 'No Posts Found')
+      array('message' => 'No Parcels Found')
     );
   }

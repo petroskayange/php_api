@@ -2,7 +2,14 @@
 
 class SendSMS{
 
-    function submitSMS($message,$receiverPhone,$senderPhone,$message_id){
+    function submitSMS($status,$referenceNumber){
+
+        $message = "Reference number: ".$referenceNumber.
+        ", Product Name: ".$_POST['name'].
+        ", Amount: ".$amount.
+        ", Status: ".$status;
+        // $message,$receiverPhone,$senderPhone,$message_id
+
         $myObj = new stdClass();
         $myObj->message = $message;
         $myObj->phone = $receiverPhone;

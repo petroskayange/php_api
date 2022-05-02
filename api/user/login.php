@@ -9,7 +9,8 @@
  include_once '../../config/Database.php';
  include_once '../../models/login.php';
  include_once '../../models/user.php';
-
+ include_once '../../config/settings.php';
+ $_SESSION['login_message'] = '';
  if($_POST['username']  && $_POST['password'])
  {
      // Instantiate DB & connect
@@ -38,20 +39,39 @@ if($post->username)
     'firstName' => $post->firstName,
     'role' => $post->role
   );
-
+  
   // Make JSON
-  print_r(json_encode($post_arr));
+  $_SESSION['login_status'] ="login successfully";
+  if($post_arr['role'] == 'Admin'){
+    header("Location: ".$base_url."/views/dashboard.php");
+    die();
+  }else{
+    print_r(json_encode($post_arr));
+  }
 }
-else
-header('HTTP/1.1 401 Unauthorized', true, 401);
+else{
+  goHome();
+}
   
     
  }else
-header('HTTP/1.1 401 Unauthorized', true, 401);
+ goHome();
 
 function console_log($message) {
     $STDERR = fopen("php://stderr", "w");
               fwrite($STDERR, "\n".$message."\n\n");
               fclose($STDERR);
+}
+function goHome(){
+  global $base_url;
+  if(isset($_GET['platform'])){
+    if($_GET['platform'] == 'website'){
+      $_SESSION['login_message'] = 'Wrong Password or Username';
+      header("Location: ".$base_url);
+    }else
+    header('HTTP/1.1 401 Unauthorized', true, 401);
+  }else
+  header('HTTP/1.1 401 Unauthorized', true, 401);
+  
 }
 ?>
