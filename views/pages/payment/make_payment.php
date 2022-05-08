@@ -134,7 +134,7 @@ $(function () {
 });
 
 
-var url ="<?=$base_url?>api/parcel/create.php";
+var url ="<?=$base_url?>api/post/create.php";
 submitFormData(url)
 
 var url = "http://localhost:8000/php_api/api/parcel/read.php";
@@ -144,8 +144,9 @@ function displayReferences(data){
     console.log(data)
     for(reference in data){
         var amount = data[reference].amount
+        var paymentMethod = data[reference].paymentMethod
         var reference    = data[reference].referenceNumber
-        if(amount == null)
+        if(paymentMethod == null)
             $('#referenceNumber').append(`<option value="${reference}">${reference}</option>`)
     }
 }

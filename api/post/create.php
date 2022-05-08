@@ -42,7 +42,6 @@
   $payment->paymentMethod = $_POST['paymentMethod'];
   $payment->paymentAt = $_POST['paymentAt'];
   $payment->date = date('m/d/Y h:i:s a', time());
-  $payment->amount = "null";
   $payment->status = $status;
 
   // Create payment
@@ -62,15 +61,15 @@
   }else
   header('HTTP/1.1 422 Invalid Data', true, 422);
 
-  function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-  }
+  // function generateRandomString($length = 10) {
+  //   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  //   $charactersLength = strlen($characters);
+  //   $randomString = '';
+  //   for ($i = 0; $i < $length; $i++) {
+  //       $randomString .= $characters[rand(0, $charactersLength - 1)];
+  //   }
+  //   return $randomString;
+  // }
 
   function console_log($message) {
     $STDERR = fopen("php://stderr", "w");

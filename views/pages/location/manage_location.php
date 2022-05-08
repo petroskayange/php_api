@@ -25,36 +25,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Customer Name</th>
-                    <th>Parcel Name</th>
                     <th>Tracking Number</th>
                     <th>Location Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Lisa Phasa</td>
-                    <td>Bag</td>
-                    <td>klr3321re</td>
-                    <td>Lilongwe</td>
-                    <td>
-                        <span class="badge bg-success">Add</span>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lincy Mwase</td>
-                    <td>Books</td>
-                    <td>klr3321re</td>
-                    <td>Mzimba</td>
-                    <td>
-                        <span class="badge bg-success">Add</span>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
+                  
                   </tbody>
                 </table>
               </div>
@@ -82,6 +59,47 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Location</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="quickForm" >
+        <div class="modal-body">
+          <input type="hidden" name="parcelID" id="parcelID">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Select Location</label>
+                  <select class="form-control select2" style="width: 100%;" name="location">
+                      <option selected="selected"></option>
+                      <option value="Blantyre">Blantyre</option>
+                      <option value="Lilongwe">Lilongwe</option>
+                      <option value="Mangochi">Mangochi</option>
+                      <option value="Salima">Salima</option>
+                      <option value="Nkhotakota">Nkhotakota</option>
+                      <option value="Mzuzu">Mzuzu</option>
+                      <option value="Kasungu">Kasungu</option>
+                  </select>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -99,27 +117,57 @@
 <script src="../../plugins/datatables-buttons/js/buttons.php5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+  // String url = "http://" + ip + "/php_api/api/notifications/create.php";
+  // submitParameters(parameters, url, returnToFunction)
+  // http://"+ip+"/php_api/api/parcel/read.php
+  var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  getData(url,'displayData')
+  function displayData(data){
+    data = data.map((value) =>{
+      
+      return [
+                value['referenceNumber'],
+                value['location'],
+                `
+                <span class="btn bg-success" onclick="setData('${value['parcelID']}')" data-toggle="modal" data-target="#modal-default">Update Location</span>
+                `
+            ]
+    })
+    $('#example1').DataTable( {
+      data: data
+  } );
+  }
+  function setData(parcelID){
+    $('#parcelID').val(parcelID);
+  }
+  var url ="<?=$base_url?>api/notifications/create.php";
+  submitFormData(url)
+  // $(function () {
+  //   $("#example1").DataTable({
+  //     "responsive": true, "lengthChange": false, "autoWidth": false,
+  //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+  //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  //   $('#example2').DataTable({
+  //     "paging": true,
+  //     "lengthChange": false,
+  //     "searching": false,
+  //     "ordering": true,
+  //     "info": true,
+  //     "autoWidth": false,
+  //     "responsive": true,
+  //   });
+  // });
 </script>
 </body>
 </html>

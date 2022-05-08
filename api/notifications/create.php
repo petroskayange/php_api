@@ -9,7 +9,7 @@
   include_once '../../config/Database.php';
   include_once '../../models/Notification.php';
 
-  if( $_POST['PackageStatus'] && 
+  if( 
       $_POST['parcelID'] && 
       $_POST['location'] ){
     // Instantiate DB & connect
@@ -21,7 +21,7 @@
 
   // Get raw posted data
  
-  $notification->PackageStatus = $_POST['PackageStatus'];
+  $notification->PackageStatus = null;
   $notification->parcelID = $_POST['parcelID'];
   $notification->location = $_POST['location'];
 

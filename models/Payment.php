@@ -80,15 +80,13 @@
     // Create Post
     public function create() {
           // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET referenceNumber = :referenceNumber, amount = :amount, type = :type, userID = :userID, date = :date, paymentMethod = :paymentMethod, paymentAt = :paymentAt, status = :status';
+          $query = 'INSERT INTO ' . $this->table . ' SET referenceNumber = :referenceNumber, userID = :userID, date = :date, paymentMethod = :paymentMethod, paymentAt = :paymentAt, status = :status';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
           $this->referenceNumber = htmlspecialchars(strip_tags($this->referenceNumber));
-          $this->amount = htmlspecialchars(strip_tags($this->amount));
-          $this->type = htmlspecialchars(strip_tags($this->type));
           $this->userID = htmlspecialchars(strip_tags($this->userID));
           $this->date = htmlspecialchars(strip_tags($this->date));
           $this->status = htmlspecialchars(strip_tags($this->status));
@@ -97,8 +95,6 @@
 
           // Bind data
           $stmt->bindParam(':referenceNumber', $this->referenceNumber);
-          $stmt->bindParam(':amount', $this->amount);
-          $stmt->bindParam(':type', $this->type);
           $stmt->bindParam(':userID', $this->userID);
           $stmt->bindParam(':date', $this->date);
           $stmt->bindParam(':status', $this->status);

@@ -27,9 +27,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3 id="totalUsers"></h3>
 
-                <p>Total Users</p>
+                <p>Total Receptionist</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -42,7 +42,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53</h3>
+                <h3 id="totalParcel"></h3>
 
                 <p>Total Parcels</p>
               </div>
@@ -57,9 +57,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3 id="totalCustomers"></h3>
 
-                <p>Customers Registrations</p>
+                <p>Total Customers</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -72,7 +72,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>7</h3>
 
                 <p>Total Locations</p>
               </div>
@@ -103,6 +103,35 @@
 </div>
 <!-- ./wrapper -->
 
+
+<script src="dist/js/backend.js"></script>
+<script>
+  var url = "http://localhost:8000/php_api/api/user/read.php";
+  getData(url,'countUsers')
+  function countUsers(data){
+    console.log(data)
+    $('#totalUsers').html(data.user_data.length)
+    $('#totalCustomers').html(data.customer_data.length)
+  }
+
+  // var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  // getData(url,'countCustomers')
+  // function countCustomers(data){
+  //   $('#totalCustomers').html(data.customer_data.length)
+  // }
+
+  var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  getData(url,'countParcels')
+  function countParcels(data){
+    $('#totalParcel').html(data.length)
+  }
+
+  // var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  // getData(url,'countParcels')
+  // function countParcels(data){
+  //   $('#totalLocation').html(data.length)
+  // }
+</script>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -137,5 +166,7 @@
 <!-- <script src="dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+
+
 </body>
 </html>
