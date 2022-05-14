@@ -22,7 +22,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="deliveryReport" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Parcel Name</th>
@@ -99,10 +99,28 @@
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
+  var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
+  getData(url,'displayData')
+  function displayData(data){
+    data = data.map((value) =>{
+      return [
+                value['name'],
+                value['referenceNumber'],
+                (value['location'] == "Delivered") ? `<span class="badge bg-success">Successfully</span>` : ` <span class="badge bg-warning">Pending</span>`
+            ]
+    })
+    $('#deliveryReport').DataTable( {
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      data: data
+  } ).buttons().container().appendTo('#deliveryReport_wrapper .col-md-6:eq(0)');;
+  }
+</script>
+<!-- <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -118,6 +136,6 @@
       "responsive": true,
     });
   });
-</script>
+</script> -->
 </body>
 </html>

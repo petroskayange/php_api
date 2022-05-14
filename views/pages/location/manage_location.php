@@ -84,6 +84,8 @@
                       <option value="Nkhotakota">Nkhotakota</option>
                       <option value="Mzuzu">Mzuzu</option>
                       <option value="Kasungu">Kasungu</option>
+                      <option value="In Transit">In Transit</option>
+                      <option value="Delivered">Delivered</option>
                   </select>
                 </div>
             </div>
