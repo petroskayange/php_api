@@ -67,7 +67,7 @@ function goHome(){
   if(isset($_GET['platform'])){
     if($_GET['platform'] == 'website'){
       $_SESSION['login_message'] = 'Wrong Password or Username';
-      header("Location: ".$base_url);
+      header("Location: ".$_SESSION['base_url']);
     }else
     header('HTTP/1.1 401 Unauthorized', true, 401);
   }else

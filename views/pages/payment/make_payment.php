@@ -134,10 +134,10 @@ $(function () {
 });
 
 
-var url ="<?=$base_url?>api/post/create.php";
+var url ="<?=$_SESSION['base_url']?>api/post/create.php";
 submitFormData(url)
 
-var url = "http://localhost:8000/php_api/api/parcel/read.php";
+var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
 getData(url,'displayReferences')
   
 function displayReferences(data){

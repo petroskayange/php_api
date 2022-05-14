@@ -143,7 +143,7 @@
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  var url ="<?=$base_url?>api/parcel/create.php";
+  var url ="<?=$_SESSION['base_url']?>api/parcel/create.php";
   submitFormData(url)
   // $("#alert_message").append(`<div class="alert alert-success alert-dismissible">
   //                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

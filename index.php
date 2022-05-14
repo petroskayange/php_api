@@ -7,16 +7,17 @@
   
   <?php 
     include("config/settings.php");
-    $base_url ="http://localhost:8000/php_api/";
+    // session_start();
+    $_SESSION['base_url'] ="http://localhost:8000/php_api/";
   ?>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=$base_url?>views/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="<?=$base_url?>views/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=$base_url?>views/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
   <?php 
@@ -40,7 +41,7 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="<?=$base_url?>api/user/login.php?platform=website" method="post">
+      <form action="<?=$_SESSION['base_url']?>api/user/login.php?platform=website" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="username" placeholder="Username">
           <div class="input-group-append">
@@ -80,10 +81,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="<?=$base_url?>views/plugins/jquery/jquery.min.js"></script>
+<script src="<?=$_SESSION['base_url']?>views/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="<?=$base_url?>views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?=$_SESSION['base_url']?>views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?=$base_url?>views/dist/js/adminlte.min.js"></script>
+<script src="<?=$_SESSION['base_url']?>views/dist/js/adminlte.min.js"></script>
 </body>
 </html>

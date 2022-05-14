@@ -89,7 +89,7 @@
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
   getData(url,'displayData')
   function displayData(data){
     data = data.map((value) =>{

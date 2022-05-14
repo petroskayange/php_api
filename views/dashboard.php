@@ -106,7 +106,7 @@
 
 <script src="dist/js/backend.js"></script>
 <script>
-  var url = "http://localhost:8000/php_api/api/user/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/user/read.php";
   getData(url,'countUsers')
   function countUsers(data){
     console.log(data)
@@ -114,19 +114,19 @@
     $('#totalCustomers').html(data.customer_data.length)
   }
 
-  // var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  // var url = "api/parcel/read.php";
   // getData(url,'countCustomers')
   // function countCustomers(data){
   //   $('#totalCustomers').html(data.customer_data.length)
   // }
 
-  var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
   getData(url,'countParcels')
   function countParcels(data){
     $('#totalParcel').html(data.length)
   }
 
-  // var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  // var url = "api/parcel/read.php";
   // getData(url,'countParcels')
   // function countParcels(data){
   //   $('#totalLocation').html(data.length)

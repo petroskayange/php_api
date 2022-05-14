@@ -131,7 +131,7 @@
   // String url = "http://" + ip + "/php_api/api/notifications/create.php";
   // submitParameters(parameters, url, returnToFunction)
   // http://"+ip+"/php_api/api/parcel/read.php
-  var url = "http://localhost:8000/php_api/api/parcel/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
   getData(url,'displayData')
   function displayData(data){
     data = data.map((value) =>{
@@ -151,7 +151,7 @@
   function setData(parcelID){
     $('#parcelID').val(parcelID);
   }
-  var url ="<?=$base_url?>api/notifications/create.php";
+  var url ="<?=$_SESSION['base_url']?>api/notifications/create.php";
   submitFormData(url)
   // $(function () {
   //   $("#example1").DataTable({
