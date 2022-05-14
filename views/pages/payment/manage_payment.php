@@ -86,7 +86,7 @@
 <!-- Page specific script -->
 <script src="../../dist/js/backend.js"></script>
 <script>
-  var url = "<?=$_SESSION['base_url']?>"+"php_api/api/post/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/post/read.php";
   getData(url,'displayData')
 
   function displayData(data){
