@@ -8,7 +8,7 @@
   <?php 
     include("config/settings.php");
     // session_start();
-    $_SESSION['base_url'] ="http://localhost:8000/php_api/";
+    $_SESSION['base_url'] ="http://localhost/php_api/";
   ?>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
