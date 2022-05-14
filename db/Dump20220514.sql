@@ -55,7 +55,7 @@ CREATE TABLE `notification` (
   `parcelID` varchar(45) DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`notificationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (1,'Blantyre','The product is in Lilongwe','1','Lilongwe'),(2,'Lilongwe','the product arrived','2','Mzuzu');
+INSERT INTO `notification` VALUES (40,'Lilongwe',NULL,'38','Blantyre'),(41,'',NULL,'38','Mangochi'),(42,'',NULL,'38','Blantyre'),(43,'',NULL,'38','Lilongwe'),(44,'',NULL,'38','Salima'),(45,'Salima',NULL,'40','Nkhotakota'),(46,'',NULL,'38','Nkhotakota'),(47,'',NULL,'38','Kasungu'),(48,'',NULL,'38','Kasungu'),(49,'',NULL,'38','Kasungu'),(50,'',NULL,'38','In Transit'),(51,'',NULL,'38','Delivered');
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,8 +86,9 @@ CREATE TABLE `parcel` (
   `referenceNumber` varchar(45) DEFAULT NULL,
   `weight` varchar(45) DEFAULT NULL,
   `receiver_phone` varchar(45) DEFAULT NULL,
+  `amount` int(50) DEFAULT NULL,
   PRIMARY KEY (`parcelID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +97,7 @@ CREATE TABLE `parcel` (
 
 LOCK TABLES `parcel` WRITE;
 /*!40000 ALTER TABLE `parcel` DISABLE KEYS */;
-INSERT INTO `parcel` VALUES (1,'tomatoes','the man wants tomatoes',NULL,NULL,'2','From Salima To Mzuzu','QbQ5KuEbrC','5','088832'),(2,'fata','the man is the tall',NULL,NULL,'2','From Kasungu To Mangochi','yQFKN3thSf','1','099334');
+INSERT INTO `parcel` VALUES (38,'Bag','Red bag',NULL,NULL,'3','From Lilongwe To Blantyre','9oJwYydy1c','10','099942342',15600),(39,'','',NULL,NULL,'','','','','',0),(40,'somba','THE MANI S D',NULL,NULL,'34','From Salima To Nkhotakota','v8oVWCa3SM','4','0999324234',68600),(41,'','',NULL,NULL,'','','','','',0),(42,'','',NULL,NULL,'','','','','',0);
 /*!40000 ALTER TABLE `parcel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,15 +111,13 @@ DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `paymentID` int(11) NOT NULL AUTO_INCREMENT,
   `referenceNumber` varchar(45) DEFAULT NULL,
-  `amount` varchar(45) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
   `userID` varchar(45) DEFAULT NULL,
   `paymentMethod` varchar(45) DEFAULT NULL,
   `paymentAt` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`paymentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +126,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'QbQ5KuEbrC','5900','03/27/2022 06:41:51 pm','5000','562','e Payment','drop off',''),(2,'yQFKN3thSf','1900','03/27/2022 07:06:49 pm','1000','362e','Cash Payment','drop off','Cleared');
+INSERT INTO `payment` VALUES (13,'9oJwYydy1c','05/08/2022 09:52:10 am','null','Cash Payment','Drop Off','Cleared'),(14,'v8oVWCa3SM','05/14/2022 01:16:06 pm','null','Cash Payment','Drop Off','Cleared'),(15,'v8oVWCa3SM','05/14/2022 01:16:09 pm','null','Cash Payment','Drop Off','Cleared');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-01 16:14:12
+-- Dump completed on 2022-05-14 21:21:48
