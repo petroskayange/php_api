@@ -4,7 +4,7 @@
     private $host = 'localhost';
     private $db_name = 'speed_courier';
     private $username = 'root';
-    private $password = '';
+    private $password = 'root';
     private $conn;
 
     // DB Connect

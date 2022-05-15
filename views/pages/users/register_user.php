@@ -30,47 +30,41 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">First Name</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                                <label for="firstName">First Name</label>
+                                <input type="text" name="firstName" class="form-control" id="firstName" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Surname</label>
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <label for="LastName">Surname</label>
+                                <input type="text" name="LastName" class="form-control" id="LastName" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                                <label for="Email">Email address</label>
+                                <input type="email" name="Email" class="form-control" id="Email" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Phone</label>
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <label for="Contact">Phone</label>
+                                <input type="number" name="Contact" class="form-control" id="Contact" placeholder="">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Address</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                                <label for="Address">Address</label>
+                                <input type="text" name="Address" class="form-control" id="Address" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Username</label>
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Password</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label>Type of User</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Customer</option>
-                                    <option>Admin</option>
-                                </select>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="">
+                                <input type="hidden" value="Admin" name="role" >
                             </div>
                         </div>
                     </div>
@@ -115,56 +109,63 @@
 <!-- jquery-validation -->
 <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-$(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
-    rules: {
-      email: {
-        required: true,
-        email: true,
-      },
-      password: {
-        required: true,
-        minlength: 5
-      },
-      terms: {
-        required: true
-      },
-    },
-    messages: {
-      email: {
-        required: "Please enter a email address",
-        email: "Please enter a valid email address"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
-      },
-      terms: "Please accept our terms"
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
+  var url ="<?=$_SESSION['base_url']?>api/user/create_user.php";
+  submitFormData(url)
+// $(function () {
+//   $.validator.setDefaults({
+//     submitHandler: function () {
+//       alert( "Form successful submitted!" );
+//     }
+//   });
+//   $('#quickForm').validate({
+//     rules: {
+//       email: {
+//         required: true,
+//         email: true,
+//       },
+//       password: {
+//         required: true,
+//         minlength: 5
+//       },
+//       terms: {
+//         required: true
+//       },
+//     },
+//     messages: {
+//       email: {
+//         required: "Please enter a email address",
+//         email: "Please enter a valid email address"
+//       },
+//       password: {
+//         required: "Please provide a password",
+//         minlength: "Your password must be at least 5 characters long"
+//       },
+//       terms: "Please accept our terms"
+//     },
+//     errorElement: 'span',
+//     errorPlacement: function (error, element) {
+//       error.addClass('invalid-feedback');
+//       element.closest('.form-group').append(error);
+//     },
+//     highlight: function (element, errorClass, validClass) {
+//       $(element).addClass('is-invalid');
+//     },
+//     unhighlight: function (element, errorClass, validClass) {
+//       $(element).removeClass('is-invalid');
+//     }
+//   });
+// });
 </script>
 </body>
 </html>

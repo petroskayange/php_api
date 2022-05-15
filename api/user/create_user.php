@@ -11,10 +11,6 @@
   include_once '../../models/user.php';
 
   
-
-  
-
-  
   if( $_POST['username'] && 
       $_POST['password'] && 
       $_POST['role'] && 
@@ -42,8 +38,6 @@
     if($user->read_single_email() ){
       $loginID = $login->createLogin();
       $loginID = $login->getLoginId();
-
-      console_log($loginID);
       // Create payment
         if($loginID) {
           $user->firstName = $_POST['firstName'];
@@ -52,7 +46,7 @@
           $user->Contact = $_POST['Contact'];
           $user->loginID = $loginID;
           if($user->createUser()){
-
+            header('HTTP/1.1 200 Successfully Submitted', true, 200);
           }else
           header('HTTP/1.1 400 Fail to create payment', true, 400);
           
