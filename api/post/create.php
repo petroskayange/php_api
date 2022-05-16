@@ -8,7 +8,6 @@
   
   include_once '../../config/Database.php';
   include_once '../../models/Payment.php';
-  include_once '../../models/parcel.php';
   include_once '../../models/Notification.php';
   include_once '../sms/SendSMS.php';
 
@@ -28,7 +27,6 @@
 
   // Instantiate blog payment object
   $payment = new Payment($db);
-  $parcel = new Parcel($db);
   $notification = new Notification($db);
 
   if($_POST['paymentMethod'] == "Cash Payment" && $_POST['paymentAt'] != "drop off")
@@ -45,7 +43,7 @@
   $payment->status = $status;
 
   // Create payment
-    if($payment->create() && $parcel->create()) {
+    if($payment->create()) {
       $sendSMS = new SendSMS();
       $sendSMS->submitSMS($status,$_POST['referenceNumber']);
       echo json_encode(

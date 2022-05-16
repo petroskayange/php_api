@@ -34,7 +34,7 @@ class SendSMS{
         );
         
         $context = stream_context_create($opts);
-        $url = 'http://192.168.1.160:3003/';        
+        $url = 'http://192.168.42.129:3003/';        
         $result = file_get_contents($url, false, $context);
         echo $result;
     }
