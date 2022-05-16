@@ -42,7 +42,10 @@
     
     // Make JSON
     $_SESSION['login_status'] ="login successfully";
-    if($post_arr['role'] == 'Admin'){
+    if($post_arr['role'] == 'Admin' && $_GET['platform'] != 'website')
+      return header('HTTP/1.1 401 Unauthorized', true, 401);
+
+    if($post_arr['role'] == 'Admin' && $_GET['platform'] == 'website'){
       echo json_encode("login successfully");
       // header("Location: ".$base_url."/views/dashboard.php");
       // die();
