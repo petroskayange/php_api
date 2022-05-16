@@ -122,6 +122,9 @@
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
+   var url ="<?=$_SESSION['base_url']?>api/price/create.php";
+  submitFormData(url)
+
   var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
   getData(url,'displayData')
   function displayData(data){

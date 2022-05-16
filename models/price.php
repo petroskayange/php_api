@@ -1,5 +1,5 @@
 <?php 
-  class Parcel {
+  class Price {
     // DB stuff
     private $conn;
     private $table = 'parcel';

@@ -146,7 +146,6 @@
 <!-- Page specific script -->
 <script>
   function perKG(title){
-    console.log("jkkkkkkkkkkk")
     $('#modal_title').html(title);
   }
   $(function () {
