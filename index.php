@@ -8,12 +8,16 @@
   <?php 
     // include("config/settings.php");
     session_start();
-    $_SESSION['base_url'] ="http://localhost:8000/php_api/";
+    $_SESSION['base_url'] ="http://localhost/php_api/";
   ?>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/fontawesome-free/css/all.min.css">
+   <!-- SweetAlert2 -->
+   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/toastr/toastr.min.css">
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
@@ -41,7 +45,7 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="<?=$_SESSION['base_url']?>api/user/login.php?platform=website" method="post">
+      <form method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="username" placeholder="Username">
           <div class="input-group-append">
@@ -84,7 +88,17 @@
 <script src="<?=$_SESSION['base_url']?>views/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?=$_SESSION['base_url']?>views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="<?=$_SESSION['base_url']?>views/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="<?=$_SESSION['base_url']?>views/plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=$_SESSION['base_url']?>views/dist/js/adminlte.min.js"></script>
+<script src="<?=$_SESSION['base_url']?>views/dist/js/backend.js"></script>
+
+<script>
+ var url ="<?=$_SESSION['base_url']?>api/user/login.php?platform=website";
+  submitFormData(url)
+</script>
 </body>
 </html>

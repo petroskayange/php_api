@@ -46,7 +46,7 @@
           $user->Contact = $_POST['Contact'];
           $user->loginID = $loginID;
           if($user->createUser()){
-            header('HTTP/1.1 200 Successfully Submitted', true, 200);
+            echo json_encode("Successfully registered");
           }else
           header('HTTP/1.1 400 Fail to create payment', true, 400);
           

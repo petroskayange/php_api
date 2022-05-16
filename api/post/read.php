@@ -30,9 +30,7 @@
       $Payment_item = array(
         'paymentID' => $paymentID,
         'referenceNumber' => $referenceNumber,
-        'amount' => $amount,
         'date' => $date,
-        'type' => $type,
         'userID' => $userID,
         'paymentMethod' => $paymentMethod,
         'paymentAt' => $paymentAt,

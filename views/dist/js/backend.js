@@ -48,6 +48,9 @@ function submitFormData(url){
     data: dataString,
     dataType:'JSON',
     success: function (data) {
+      console.log(data)
+      if(data == "login successfully")
+       window.location = "/php_api/views/dashboard.php";
       Toast.fire({
         icon: 'success',
         title: 'Successfully submitted'
@@ -56,9 +59,13 @@ function submitFormData(url){
       
     },
     error: function (error) {
+      if(error.statusText)
+       var title = error.statusText;
+      else
+       var title = 'Failing to submit';
       Toast.fire({
       icon: 'error',
-      title: 'Failing to submit'
+      title: title
     })
     }
   });

@@ -14,64 +14,68 @@
  if($_POST['username']  && $_POST['password'])
  {
      // Instantiate DB & connect
-  $database = new Database();
-  $db = $database->connect();
+    $database = new Database();
+    $db = $database->connect();
 
-  // Instantiate blog post object
-  $post = new Login($db);
+    // Instantiate blog post object
+    $post = new Login($db);
 
-  // Get ID
-  $post->username = $_POST['username'];
-  $post->password = $_POST['password'];
+    // Get ID
+    $post->username = $_POST['username'];
+    $post->password = $_POST['password'];
 
-  // Get post
-  $post->read_single();
-// Create array
-if($post->username)
-{
-    $post_arr = array(
-    'username' => $post->username,
-    'loginID' => $post->loginID,
-    'Contact' => $post->Contact,
-    'Address' => $post->Address,
-    'Email' => $post->Email,
-    'LastName' => $post->LastName,
-    'firstName' => $post->firstName,
-    'role' => $post->role
-  );
-  
-  // Make JSON
-  $_SESSION['login_status'] ="login successfully";
-  if($post_arr['role'] == 'Admin'){
-    header("Location: ".$base_url."/views/dashboard.php");
-    die();
-  }else{
-    print_r(json_encode($post_arr));
+    // Get post
+    $post->read_single();
+  // Create array
+  if($post->username)
+  {
+      $post_arr = array(
+      'username' => $post->username,
+      'loginID' => $post->loginID,
+      'Contact' => $post->Contact,
+      'Address' => $post->Address,
+      'Email' => $post->Email,
+      'LastName' => $post->LastName,
+      'firstName' => $post->firstName,
+      'role' => $post->role
+    );
+    
+    // Make JSON
+    $_SESSION['login_status'] ="login successfully";
+    if($post_arr['role'] == 'Admin'){
+      echo json_encode("login successfully");
+      // header("Location: ".$base_url."/views/dashboard.php");
+      // die();
+    }else{
+      print_r(json_encode($post_arr));
+    }
   }
-}
-else{
-  goHome();
-}
+  else{
+    header('HTTP/1.1 400 Fail to login', true, 400);
+  }
   
     
  }else
- goHome();
-
-function console_log($message) {
-    $STDERR = fopen("php://stderr", "w");
-              fwrite($STDERR, "\n".$message."\n\n");
-              fclose($STDERR);
-}
-function goHome(){
-  global $base_url;
-  if(isset($_GET['platform'])){
-    if($_GET['platform'] == 'website'){
-      $_SESSION['login_message'] = 'Wrong Password or Username';
-      header("Location: ".$_SESSION['base_url']);
-    }else
+ {
+    print_r("Fail to login");
     header('HTTP/1.1 401 Unauthorized', true, 401);
-  }else
-  header('HTTP/1.1 401 Unauthorized', true, 401);
+ }
+
+// function console_log($message) {
+//     $STDERR = fopen("php://stderr", "w");
+//               fwrite($STDERR, "\n".$message."\n\n");
+//               fclose($STDERR);
+// }
+// function goHome(){
+//   global $base_url;
+//   if(isset($_GET['platform'])){
+//     if($_GET['platform'] == 'website'){
+//       $_SESSION['login_message'] = 'Wrong Password or Username';
+//       header("Location: ".$base_url);
+//     }else
+//     header('HTTP/1.1 401 Unauthorized', true, 401);
+//   }else
+//   header('HTTP/1.1 401 Unauthorized', true, 401);
   
-}
+// }
 ?>
