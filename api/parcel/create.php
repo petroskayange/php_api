@@ -37,7 +37,7 @@
   $parcel->weight = $_POST['weight'];
   $parcel->quantity = $_POST['quantity'];
   $parcel->referenceNumber = $referenceNumber;
-  $parcel->receiver_phone = $_POST['receiver_phone'];
+  $parcel->receiver_phone = $_POST['receiver_phone']." & ". $_POST['sender_phone'];
   $parcel->description = $_POST['description'];
   $parcel->destination = "From ". $_POST['from']." To ". $_POST['to'];
   $parcel->amount = calculateAmount($_POST['weight'],$_POST['quantity'],$_POST['to'],$_POST['from']);

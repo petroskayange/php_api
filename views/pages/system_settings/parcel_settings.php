@@ -35,7 +35,7 @@
                     <td>Per KG Cost</td>
                     <td>500</td>
                     <td>
-                        <span class="badge bg-warning">Edit</span>
+                        <span class="badge bg-warning" onclick="perKG('Set per KG price')" data-toggle="modal" data-target="#modal-default">Edit</span>
                         <span class="badge bg-danger">Delete</span>
                     </td>
                   </tr>
@@ -43,7 +43,7 @@
                     <td>Between Districts</td>
                     <td>300</td>
                     <td>
-                        <span class="badge bg-warning">Edit</span>
+                        <span class="badge bg-warning" onclick="perKG('Set Between Districts price')" data-toggle="modal" data-target="#modal-default">Edit</span>
                         <span class="badge bg-danger">Delete</span>
                     </td>
                   </tr>
@@ -51,7 +51,7 @@
                     <td>Within District</td>
                     <td>200</td>
                     <td>
-                        <span class="badge bg-warning">Edit</span>
+                        <span class="badge bg-warning" onclick="perKG('Set Within District price')" data-toggle="modal" data-target="#modal-default">Edit</span>
                         <span class="badge bg-danger">Delete</span>
                     </td>
                   </tr>
@@ -86,6 +86,38 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal_title">Set Amount</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="quickForm" >
+        <div class="modal-body">
+          <input type="hidden" name="parcelID" id="parcelID">
+          <div class="row">
+            <div class="col-md-12">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Amount</label>
+                <input type="tex" name="name" class="form-control" id="name" placeholder="">
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -103,12 +135,20 @@
 <script src="../../plugins/datatables-buttons/js/buttons.php5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
+  function perKG(title){
+    console.log("jkkkkkkkkkkk")
+    $('#modal_title').html(title);
+  }
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,

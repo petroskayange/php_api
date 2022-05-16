@@ -1,8 +1,8 @@
 <?php 
-  class Parcel {
+  class Branch {
     // DB stuff
     private $conn;
-    private $table = 'parcel';
+    private $table = 'branches';
 
     // Post Properties
     public $id;
@@ -45,28 +45,7 @@
     // Get Posts
     public function read() {
       // Create query
-      $query = 'SELECT * FROM ( SELECT 
-              p.parcelID,
-              p.name,
-              p.description, 
-              p.type,
-              p.fee,
-              p.destination, 
-              p.referenceNumber, 
-              p.weight,
-              p.amount,
-              p.receiver_phone, 
-              p.quantity,
-              n.PackageStatus, 
-              n.message,
-              n.location,
-              n.notificationID,
-              t.status,
-              t.paymentMethod
-              FROM ' . $this->table . ' p
-                                INNER JOIN notification n ON p.parcelID = n.parcelID 
-                                LEFT JOIN payment t ON t.referenceNumber = p.referenceNumber 
-                                order by n.notificationID desc) AS tmp_table GROUP BY parcelID';
+      $query = 'SELECT * FROM  ' . $this->table ;
       
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -136,30 +115,16 @@
     // Create Post
     public function create() {
           // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET name = :name, amount = :amount, weight = :weight, quantity = :quantity, referenceNumber = :referenceNumber, receiver_phone = :receiver_phone, description = :description, destination = :destination';
+          $query = 'INSERT INTO ' . $this->table . ' SET name = :name';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
           $this->name = htmlspecialchars(strip_tags($this->name));
-          $this->weight = htmlspecialchars(strip_tags($this->weight));
-          $this->amount = htmlspecialchars(strip_tags($this->amount));
-          $this->quantity = htmlspecialchars(strip_tags($this->quantity));
-          $this->referenceNumber = htmlspecialchars(strip_tags($this->referenceNumber));
-          $this->receiver_phone = htmlspecialchars(strip_tags($this->receiver_phone));
-          $this->description = htmlspecialchars(strip_tags($this->description));
-          $this->destination = htmlspecialchars(strip_tags($this->destination));
 
           // Bind data
           $stmt->bindParam(':name', $this->name);
-          $stmt->bindParam(':amount', $this->amount);
-          $stmt->bindParam(':weight', $this->weight);
-          $stmt->bindParam(':quantity', $this->quantity);
-          $stmt->bindParam(':referenceNumber', $this->referenceNumber);
-          $stmt->bindParam(':receiver_phone', $this->receiver_phone);
-          $stmt->bindParam(':description', $this->description);
-          $stmt->bindParam(':destination', $this->destination);
 
           // Execute query
           if($stmt->execute()) {

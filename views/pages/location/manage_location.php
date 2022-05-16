@@ -75,15 +75,8 @@
             <div class="col-md-12">
               <div class="form-group">
                   <label for="exampleInputPassword1">Select Location</label>
-                  <select class="form-control select2" style="width: 100%;" name="location">
+                  <select class="form-control select2 listDistrict" style="width: 100%;" name="location">
                       <option selected="selected"></option>
-                      <option value="Blantyre">Blantyre</option>
-                      <option value="Lilongwe">Lilongwe</option>
-                      <option value="Mangochi">Mangochi</option>
-                      <option value="Salima">Salima</option>
-                      <option value="Nkhotakota">Nkhotakota</option>
-                      <option value="Mzuzu">Mzuzu</option>
-                      <option value="Kasungu">Kasungu</option>
                       <option value="In Transit">In Transit</option>
                       <option value="Delivered">Delivered</option>
                   </select>
@@ -155,6 +148,16 @@
   }
   var url ="<?=$_SESSION['base_url']?>api/notifications/create.php";
   submitFormData(url)
+
+  var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
+  getData(url,'displayDistricts')
+  function displayDistricts(data){
+    data = data.map((value) =>{
+      console.log(value['name'])
+            $('.listDistrict').append(`<option value="${value['name']}">${value['name']}</option>` );
+    })
+    
+  }
   // $(function () {
   //   $("#example1").DataTable({
   //     "responsive": true, "lengthChange": false, "autoWidth": false,

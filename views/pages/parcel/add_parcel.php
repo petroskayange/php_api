@@ -46,15 +46,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="#">From</label>
-                                <select class="form-control select2" style="width: 100%;" name="from">
-                                    <option selected="selected"></option>
-                                    <option value="Blantyre">Blantyre</option>
-                                    <option value="Lilongwe">Lilongwe</option>
-                                    <option value="Mangochi">Mangochi</option>
-                                    <option value="Salima">Salima</option>
-                                    <option value="Nkhotakota">Nkhotakota</option>
-                                    <option value="Mzuzu">Mzuzu</option>
-                                    <option value="Kasungu">Kasungu</option>
+                                <select class="form-control select2 listDistrict" style="width: 100%;" name="from" id="listDistrict">
+                                   
                                 </select>
                             </div>
                         </div>
@@ -63,15 +56,8 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="exampleInputPassword1">To</label>
-                              <select class="form-control select2" style="width: 100%;" name="to">
-                                  <option selected="selected"></option>
-                                  <option value="Blantyre">Blantyre</option>
-                                  <option value="Lilongwe">Lilongwe</option>
-                                  <option value="Mangochi">Mangochi</option>
-                                  <option value="Salima">Salima</option>
-                                  <option value="Nkhotakota">Nkhotakota</option>
-                                  <option value="Mzuzu">Mzuzu</option>
-                                  <option value="Kasungu">Kasungu</option>
+                              <select class="form-control select2 listDistrict" style="width: 100%;" name="to" id="listDistrict">
+                                  
                               </select>
                             </div>
                             <div class="form-group">
@@ -145,6 +131,17 @@
 <script>
   var url ="<?=$_SESSION['base_url']?>api/parcel/create.php";
   submitFormData(url)
+
+  var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
+  getData(url,'displayData')
+  function displayData(data){
+    $('.listDistrict').append(`<option selected="selected"></option>`);
+    data = data.map((value) =>{
+      console.log(value['name'])
+            $('.listDistrict').append(`<option value="${value['name']}">${value['name']}</option>` );
+    })
+    
+  }
   // $("#alert_message").append(`<div class="alert alert-success alert-dismissible">
   //                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   //                 <h5><i class="icon fas fa-inf"></i> Notes!</h5>

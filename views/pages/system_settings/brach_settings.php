@@ -22,7 +22,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="brach_table" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>Branch Name</th>
@@ -30,20 +30,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Kasungu</td>
-                    <td>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Mzuzu</td>
-                    <td>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
+                 
                   </tbody>
                 </table>
               </div>
@@ -71,6 +58,42 @@
 </div>
 <!-- ./wrapper -->
 
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Location</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="quickForm" >
+        <div class="modal-body">
+          <input type="hidden" name="parcelID" id="parcelID">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                  <label for="exampleInputPassword1">Select Location</label>
+                  <select class="form-control select2 listDistrict" style="width: 100%;" name="location">
+                      <option selected="selected"></option>
+                      <option value="In Transit">In Transit</option>
+                      <option value="Delivered">Delivered</option>
+                  </select>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -88,27 +111,49 @@
 <script src="../../plugins/datatables-buttons/js/buttons.php5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+  var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
+  getData(url,'displayData')
+  function displayData(data){
+    data = data.map((value) =>{
+      return [
+                value['name'],
+                `
+                <span class="badge bg-warning">Edit</span>
+                <span class="badge bg-danger">Delete</span>`
+            ]
+    })
+    $('#brach_table').DataTable( {
+      data: data
+  } );
+  }
+</script>
+<script>
+  // $(function () {
+  //   $("#example1").DataTable({
+  //     "responsive": true, "lengthChange": false, "autoWidth": false,
+  //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+  //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  //   $('#example2').DataTable({
+  //     "paging": true,
+  //     "lengthChange": false,
+  //     "searching": false,
+  //     "ordering": true,
+  //     "info": true,
+  //     "autoWidth": false,
+  //     "responsive": true,
+  //   });
+  // });
 </script>
 </body>
 </html>
