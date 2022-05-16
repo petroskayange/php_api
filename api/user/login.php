@@ -42,7 +42,7 @@
     
     // Make JSON
     $_SESSION['login_status'] ="login successfully";
-    if($post_arr['role'] == 'Admin' && $_GET['platform'] != 'website')
+    if($post_arr['role'] == 'Admin' && !isset($_GET['platform']))
       return header('HTTP/1.1 401 Unauthorized', true, 401);
 
     if($post_arr['role'] == 'Admin' && $_GET['platform'] == 'website'){
