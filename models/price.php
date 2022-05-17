@@ -2,7 +2,7 @@
   class Price {
     // DB stuff
     private $conn;
-    private $table = 'parcel';
+    private $table = 'prices';
 
     // Post Properties
     public $id;
@@ -45,28 +45,7 @@
     // Get Posts
     public function read() {
       // Create query
-      $query = 'SELECT * FROM ( SELECT 
-              p.parcelID,
-              p.name,
-              p.description, 
-              p.type,
-              p.fee,
-              p.destination, 
-              p.referenceNumber, 
-              p.weight,
-              p.amount,
-              p.receiver_phone, 
-              p.quantity,
-              n.PackageStatus, 
-              n.message,
-              n.location,
-              n.notificationID,
-              t.status,
-              t.paymentMethod
-              FROM ' . $this->table . ' p
-                                INNER JOIN notification n ON p.parcelID = n.parcelID 
-                                LEFT JOIN payment t ON t.referenceNumber = p.referenceNumber 
-                                order by n.notificationID desc) AS tmp_table GROUP BY parcelID';
+      $query = 'SELECT * FROM ' . $this->table;
       
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -176,18 +155,18 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET PackageStatus = :PackageStatus WHERE parcelID = :parcelID';
+                                SET amount = :amount WHERE id = :id';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
-          $this->PackageStatus = htmlspecialchars(strip_tags($this->PackageStatus));
-          $this->parcelID = htmlspecialchars(strip_tags($this->parcelID));
+          $this->amount = htmlspecialchars(strip_tags($this->amount));
+          $this->id = htmlspecialchars(strip_tags($this->id));
 
           // Bind data
-          $stmt->bindParam(':PackageStatus', $this->PackageStatus);
-          $stmt->bindParam(':parcelID', $this->parcelID);
+          $stmt->bindParam(':id', $this->id);
+          $stmt->bindParam(':amount', $this->amount);
 
           // Execute query
           if($stmt->execute()) {

@@ -31,30 +31,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Per KG Cost</td>
-                    <td>500</td>
-                    <td>
-                        <span class="badge bg-warning" onclick="perKG('Set per KG price')" data-toggle="modal" data-target="#modal-default">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Between Districts</td>
-                    <td>300</td>
-                    <td>
-                        <span class="badge bg-warning" onclick="perKG('Set Between Districts price')" data-toggle="modal" data-target="#modal-default">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Within District</td>
-                    <td>200</td>
-                    <td>
-                        <span class="badge bg-warning" onclick="perKG('Set Within District price')" data-toggle="modal" data-target="#modal-default">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
+                  
                   </tbody>
                 </table>
               </div>
@@ -102,7 +79,8 @@
             <div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Amount</label>
-                <input type="tex" name="name" class="form-control" id="name" placeholder="">
+                <input type="text" name="amount" class="form-control" id="amount" placeholder="">
+                <input type="hidden" name="id" id="amount_id">
             </div>
             </div>
           </div>
@@ -141,28 +119,35 @@
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  function perKG(title){
+  function perKG(title,id){
+    $('#amount_id').attr("value",id);
     $('#modal_title').html(title);
   }
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+  var url ="<?=$_SESSION['base_url']?>api/price/update.php";
+  submitFormData(url)
+
+  var url = "<?=$_SESSION['base_url']?>"+"api/price/read.php";
+  getData(url,'displayData')
+
+  function displayData(data){
+    data = data.map((value) =>{
+      return [
+                value['name'],
+                value['amount'],
+                `
+                <span class="badge bg-warning" onclick="perKG('${value['title']}',${value['id']})" data-toggle="modal" data-target="#modal-default">Edit</span>`
+            ]
+    })
+    $('#example1').DataTable( {
+      data: data
     });
-  });
+  }
+
 </script>
 </body>
 </html>

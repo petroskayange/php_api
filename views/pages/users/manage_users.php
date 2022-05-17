@@ -25,45 +25,16 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>User Name</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
                     <th>Username</th>
                     <th>Role</th>
-                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Lisa Phasa</td>
-                    <td>Lisa@gmail.com</td>
-                    <td>0888435435</td>
-                    <td>P.O Box 33</td>
-                    <td>hello</td>
-                    <td>Admin</td>
-                    <td><span class="badge bg-success">Active</span></td>
-                    <td>
-                        <span class="badge bg-success">Deactivate</span>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lisa Phasa</td>
-                    <td>Lisa@gmail.com</td>
-                    <td>0888435435</td>
-                    <td>P.O Box 33</td>
-                    <td>hello</td>
-                    <td>Admin</td>
-                    <td><span class="badge bg-warning">Inactive</span></td>
-                    <td>
-                        <span class="badge bg-success">Add</span>
-                        <span class="badge bg-warning">Edit</span>
-                        <span class="badge bg-danger">Delete</span>
-                    </td>
-                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -113,22 +84,32 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
+<script src="../../dist/js/backend.js"></script>
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+  var url = "<?=$_SESSION['base_url']?>"+"api/user/read.php";
+  getData(url,'displayData')
+        // 'LastName' => $LastName,
+  function displayData(data){
+    data = data.user_data.concat(data.customer_data);
+    data = data.map((value) =>{
+      return [
+                value['firstName'],
+                value['Email'],
+                value['Contact'],
+                value['Address'],
+                value['username'],
+                value['role'],
+                `
+                <a href="${value['userID']}">
+                  <span class="badge bg-warning">Edit</span>
+                </a>
+                <span class="badge bg-danger">Delete</span>`
+            ]
+    })
+    $('#example1').DataTable( {
+      data: data
     });
-  });
+  }
 </script>
 </body>
 </html>
