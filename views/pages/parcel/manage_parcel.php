@@ -33,7 +33,6 @@
                     <th>Description</th>
                     <th>weight</th>
                     <th>Amount</th>
-                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -101,10 +100,7 @@
                 value['quantity'],
                 value['description'],
                 value['weight'],
-                value['amount'],
-                `
-                <span class="badge bg-warning">Edit</span>
-                <span class="badge bg-danger">Delete</span>`
+                value['amount']
             ]
     })
     $('#parcel_table').DataTable( {

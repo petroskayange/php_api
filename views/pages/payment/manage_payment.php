@@ -29,7 +29,6 @@
                     <th>Payment Method</th>
                     <th>Payment At</th>
                     <th>Status</th>
-                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -95,12 +94,7 @@
                 value['referenceNumber'],
                 value['paymentMethod'],
                 value['paymentAt'],
-                value['status'],
-                `
-                <a href="${value['paymentID']}">
-                  <span class="badge bg-warning">Edit</span>
-                </a>
-                <span class="badge bg-danger">Delete</span>`
+                value['status']
             ]
     })
     $('#payment_table').DataTable( {
