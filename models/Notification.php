@@ -74,6 +74,20 @@
     // Create Post
    // Create Post
    public function create() {
+
+     // Create query
+     $query = 'UPDATE ' . $this->table . '
+     SET currentLocation = :currentLocation WHERE parcelID = :parcelID';
+
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+
+    // Bind data
+    $stmt->bindParam(':currentLocation', $this->location);
+    $stmt->bindParam(':parcelID', $this->parcelID);
+    $stmt->execute();
+
+    // n.currentLocation,
     // Create query
     $query = 'INSERT INTO ' . $this->table . ' SET PackageStatus = :PackageStatus, parcelID = :parcelID, location = :location';
 

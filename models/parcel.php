@@ -60,12 +60,14 @@
               n.PackageStatus, 
               n.message,
               n.location,
+              n.currentLocation,
               n.notificationID,
               t.status,
               t.paymentMethod
               FROM ' . $this->table . ' p
                                 INNER JOIN notification n ON p.parcelID = n.parcelID 
                                 LEFT JOIN payment t ON t.referenceNumber = p.referenceNumber 
+                                WHERE n.currentLocation is null
                                 order by n.notificationID desc) AS tmp_table GROUP BY parcelID';
       
       // Prepare statement
