@@ -97,7 +97,8 @@
 <script src="<?=$_SESSION['base_url']?>views/dist/js/backend.js"></script>
 
 <script>
- var url ="<?=$_SESSION['base_url']?>api/user/login.php?platform=website";
+  var base_url = "<?=$_SESSION['base_url']?>";
+  var url ="<?=$_SESSION['base_url']?>api/user/login.php?platform=website";
   submitFormData(url)
 </script>
 </body>

@@ -32,3 +32,9 @@
   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/plugins/summernote/summernote-bs4.min.css">
+  <script>
+      var base_url = "<?=$_SESSION['base_url']?>";
+      console.log(base_url)
+      if(base_url == "")
+      window.location.href = "/php_api"
+  </script>

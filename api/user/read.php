@@ -32,6 +32,7 @@
         'username' => $username,
         'role' => $role,
         'userID' => $userID,
+        'loginID' => $loginID,
         'firstName' => $firstName,
         'LastName' => $LastName,
         'Email' => $Email,

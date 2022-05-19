@@ -25,8 +25,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Tracking Number</th>
+                    <th>Parcel Name</th>
+                    <th>Reference Number</th>
                     <th>Location Status</th>
+                    <th>Destination</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -129,16 +131,23 @@
   var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
   getData(url,'displayData')
   function displayData(data){
-    data = data.map((value) =>{
-      
-      return [
-                value['referenceNumber'],
-                value['location'],
-                `
-                <span class="btn bg-success" onclick="setData('${value['parcelID']}')" data-toggle="modal" data-target="#modal-default">Update Location</span>
-                `
-            ]
+    data = data.filter(function(value){
+      if((value['location'] == "Delivered"))
+        return false
+      return true;
     })
+    data = data.map((value) =>{
+        return [
+                  value['name'],
+                  value['referenceNumber'],
+                  value['location'],
+                  value['destination'],
+                  `
+                  <span class="btn bg-success" onclick="setData('${value['parcelID']}')" data-toggle="modal" data-target="#modal-default">Update Location</span>
+                  `
+              ]
+    })
+    console.log(data)
     $('#example1').DataTable( {
       data: data
   } );

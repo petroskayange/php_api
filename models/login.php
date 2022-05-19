@@ -6,6 +6,7 @@
 
     // Post Properties
     public $id;
+    public $loginID;
     public $paymentID;
     public $referenceNumber;
     public $amount;
@@ -188,16 +189,16 @@
     // Delete Post
     public function delete() {
           // Create query
-          $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+          $query = 'DELETE FROM ' . $this->table . ' WHERE loginID = :loginID';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
-          $this->id = htmlspecialchars(strip_tags($this->id));
+          $this->loginID = htmlspecialchars(strip_tags($this->loginID));
 
           // Bind data
-          $stmt->bindParam(':id', $this->id);
+          $stmt->bindParam(':loginID', $this->loginID);
 
           // Execute query
           if($stmt->execute()) {

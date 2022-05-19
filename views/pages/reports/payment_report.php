@@ -26,33 +26,13 @@
                   <thead>
                   <tr>
                     <th>Parcel Name</th>
-                    <th>Tracking Number</th>
+                    <th>Reference Number</th>
+                    <th>Amount</th>
                     <th>Payment Status</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Bag</td>
-                    <td>klr3321re</td>
-                    <td>
-                        <span class="badge bg-success">Successfully</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bag</td>
-                    <td>klr3321re</td>
-                    <td>
-                        <span class="badge bg-warning">Pending</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bag</td>
-                    <td>klr3321re</td>
-                    <td>
-                        <span class="badge bg-danger">Failed</span>
-                    </td>
-                  </tr>
-                 
+                  
                   </tbody>
                 </table>
               </div>
@@ -70,10 +50,6 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
@@ -103,25 +79,27 @@
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/backend.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+  var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
+  getData(url,'displayData')
+  function displayData(data){
+    data = data.map((value) =>{
+      return [
+                value['name'],
+                value['referenceNumber'],
+                value['amount'],
+                value['status']  == 'Cleared' ? `<span class="badge bg-success">Successfully</span>` : `<span class="badge bg-danger">Failed</span>`
+            ]
+    })
+    $('#example1').DataTable( {
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      data: data
+  } ).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  }
 </script>
 </body>
 </html>

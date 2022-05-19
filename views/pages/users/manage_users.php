@@ -79,6 +79,10 @@
 <script src="../../plugins/datatables-buttons/js/buttons.php5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -92,6 +96,7 @@
   function displayData(data){
     data = data.user_data.concat(data.customer_data);
     data = data.map((value) =>{
+      var delete_url = base_url+'api/user/delete.php?loginID='+value['loginID'];
       return [
                 value['firstName'],
                 value['Email'],
@@ -100,10 +105,10 @@
                 value['username'],
                 value['role'],
                 `
-                <a href="${value['userID']}">
+                <a href="${value['loginID']}">
                   <span class="badge bg-warning">Edit</span>
                 </a>
-                <span class="badge bg-danger">Delete</span>`
+                <span class="badge bg-danger" onclick="deleteData('${delete_url}')">Delete</span>`
             ]
     })
     $('#example1').DataTable( {
