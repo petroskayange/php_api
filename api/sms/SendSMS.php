@@ -36,7 +36,6 @@ class SendSMS{
         $myObj2->message_id = $message_id;
         
         $myJSON = array($myObj,$myObj2);
-        console_log($myJSON);
         return $myJSON;
        
     }

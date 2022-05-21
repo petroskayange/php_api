@@ -27,7 +27,6 @@
 
   // Instantiate blog payment object
   $payment = new Payment($db);
-  $notification = new Notification($db);
 
   if($_POST['paymentMethod'] == "Cash Payment" && $_POST['paymentAt'] != "drop off")
     $status = "Cleared";
@@ -43,17 +42,17 @@
   $payment->status = $status;
 
   // Create payment
-    // if($payment->create()) {
+    if($payment->create()) {
       $sendSMS = new SendSMS();
       $smsData = $sendSMS->submitSMS($status,$_POST['referenceNumber']);
       echo json_encode($smsData);
-    // } else {
+    } else {
 
-    //   echo json_encode(
-    //     array('message' => 'Post Not Created')
-    //   );
-    //   header('HTTP/1.1 400 Fail to create payment', true, 400);
-    // }
+      echo json_encode(
+        array('message' => 'Post Not Created')
+      );
+      header('HTTP/1.1 400 Fail to create payment', true, 400);
+    }
   }else
   header('HTTP/1.1 422 Invalid Data', true, 422);
 
