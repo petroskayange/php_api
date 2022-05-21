@@ -188,6 +188,7 @@ function submitFormPayment(url){
   });
 }
 function sendSMS(data){
+  console.log(data)
   var form = new FormData();
   form.append("",JSON.stringify(data));
   var ip = getCookie('ipAddress');
