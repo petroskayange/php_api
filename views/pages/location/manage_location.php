@@ -165,8 +165,8 @@
       console.log(value['name'])
             $('.listDistrict').append(`<option value="${value['name']}">${value['name']}</option>` );
     })
-    
   }
+  
   // $(function () {
   //   $("#example1").DataTable({
   //     "responsive": true, "lengthChange": false, "autoWidth": false,

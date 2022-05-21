@@ -20,7 +20,8 @@ function submitParameters(parameters, url, returnToFunction) {
   
   
   function getData(url,returnToFunction) {
-    loader();
+    if(returnToFunction != "displayDistricts")
+      loader();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && (this.status == 201 || this.status == 200)) {
