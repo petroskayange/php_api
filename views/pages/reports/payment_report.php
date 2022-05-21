@@ -92,7 +92,7 @@
                 value['name'],
                 value['referenceNumber'],
                 value['amount'],
-                value['status']  == 'Cleared' ? `<span class="badge bg-success">Successfully</span>` : `<span class="badge bg-danger">Failed</span>`
+                value['status']  == 'Cleared' ? `<span class="badge bg-success">Successfully</span>` : `<span class="badge bg-danger">Not done</span>`
             ]
     })
     $('#example1').DataTable( {

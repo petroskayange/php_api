@@ -43,19 +43,17 @@
   $payment->status = $status;
 
   // Create payment
-    if($payment->create()) {
+    // if($payment->create()) {
       $sendSMS = new SendSMS();
-      $sendSMS->submitSMS($status,$_POST['referenceNumber']);
-      echo json_encode(
-        array('message' => 'Post Created')
-      );
-    } else {
+      $smsData = $sendSMS->submitSMS($status,$_POST['referenceNumber']);
+      echo json_encode($smsData);
+    // } else {
 
-      echo json_encode(
-        array('message' => 'Post Not Created')
-      );
-      header('HTTP/1.1 400 Fail to create payment', true, 400);
-    }
+    //   echo json_encode(
+    //     array('message' => 'Post Not Created')
+    //   );
+    //   header('HTTP/1.1 400 Fail to create payment', true, 400);
+    // }
   }else
   header('HTTP/1.1 422 Invalid Data', true, 422);
 

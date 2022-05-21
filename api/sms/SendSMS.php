@@ -8,6 +8,7 @@ class SendSMS{
         // Instantiate DB & connect
         $database = new Database();
         $db = $database->connect();
+        $message_id = 1;
 
         // Instantiate blog post object
         $Parcel = new Parcel($db);
@@ -24,7 +25,6 @@ class SendSMS{
         ", Amount: ".$amount.
         ", Status: ".$status;
         // $message,$receiverPhone,$senderPhone,$message_id
-        console_log(json_encode($phones));
         $myObj = new stdClass();
         $myObj->message = $message;
         $myObj->phone = $phones[1];
@@ -34,31 +34,11 @@ class SendSMS{
         $myObj2->message = $message;
         $myObj2->phone = $phones[0];
         $myObj2->message_id = $message_id;
-        console_log(json_encode($myObj));
-        console_log(json_encode($myObj2));
-        $myJSON = json_encode(array($myObj,$myObj2));
-        $opts = array(
-            'http' =>array(
-                'timeout' => 30,
-                'method' => 'POST',
-                'header' => "Content-type: multipart/form-data\r\n".
-                "User-Agent:MyAgent/1.0\r\n".
-                "Connection: keep-alive\r\n".
-                "Content-Disposition:form-data; name='json' \r\n".
-                $myJSON
-            )
-        );
         
-        $context = stream_context_create($opts);
-        $url = 'http://192.168.42.129:3003/';        
-        $result = file_get_contents($url, false, $context);
-        echo $result;
-    }
-
-    function console_log($message) {
-        $STDERR = fopen("php://stderr", "w");
-                  fwrite($STDERR, "\n".$message."\n\n");
-                  fclose($STDERR);
+        $myJSON = array($myObj,$myObj2);
+        console_log($myJSON);
+        return $myJSON;
+       
     }
 
 }

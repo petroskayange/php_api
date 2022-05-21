@@ -135,7 +135,7 @@ $(function () {
 
 
 var url ="<?=$_SESSION['base_url']?>api/post/create.php";
-submitFormData(url)
+submitFormPayment(url)
 
 var url = "<?=$_SESSION['base_url']?>"+"api/parcel/read.php";
 getData(url,'displayReferences')
@@ -150,57 +150,65 @@ function displayReferences(data){
             $('#referenceNumber').append(`<option value="${reference}">${reference}</option>`)
     }
 }
-  // $("#alert_message").append(`<div class="alert alert-success alert-dismissible">
-  //                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  //                 <h5><i class="icon fas fa-inf"></i> Notes!</h5>
-  //                 Fail to submit
-  //               </div>`)
- 
+  
+function submitFormPayment(url){
+  $("form").on( "submit", function(e) {
+    loader();
+  var dataString = $(this).serialize();
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: dataString,
+    dataType:'JSON',
+    success: function (data) {
+      
+      console.log(data)
+      sendSMS(data)
+      dismissLoader();
+      Toast.fire({
+        icon: 'success',
+        title: 'Successfully submitted'
+      })
+      setTimeout(() => { window.location.reload().delay; }, 1000);
+      
+    },
+    error: function (error) {
+      if(error.statusText)
+       var title = error.statusText;
+      else
+       var title = 'Failing to submit';
+      Toast.fire({
+      icon: 'error',
+      title: title
+    })
+    }
+  });
 
-// $(function () {
-//   $.validator.setDefaults({
-//     submitHandler: function () {
-//       alert( "Form successful submitted!" );
-//     }
-//   });
-//   $('#quickForm').validate({
-//     rules: {
-//       email: {
-//         required: true,
-//         email: true,
-//       },
-//       password: {
-//         required: true,
-//         minlength: 5
-//       },
-//       terms: {
-//         required: true
-//       },
-//     },
-//     messages: {
-//       email: {
-//         required: "Please enter a email address",
-//         email: "Please enter a valid email address"
-//       },
-//       password: {
-//         required: "Please provide a password",
-//         minlength: "Your password must be at least 5 characters long"
-//       },
-//       terms: "Please accept our terms"
-//     },
-//     errorElement: 'span',
-//     errorPlacement: function (error, element) {
-//       error.addClass('invalid-feedback');
-//       element.closest('.form-group').append(error);
-//     },
-//     highlight: function (element, errorClass, validClass) {
-//       $(element).addClass('is-invalid');
-//     },
-//     unhighlight: function (element, errorClass, validClass) {
-//       $(element).removeClass('is-invalid');
-//     }
-//   });
-// });
+  e.preventDefault();
+  });
+}
+function sendSMS(data){
+  var form = new FormData();
+  form.append("",JSON.stringify(data));
+  var ip = getCookie('ipAddress');
+  var settings = {
+    "url": "http://"+ip+":3003/",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form
+  };
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
+  
+
+
+
 </script>
 </body>
 </html>

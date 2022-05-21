@@ -191,6 +191,12 @@
                   <p>Add Branch</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?=$_SESSION['base_url']?>views/pages/system_settings/setIPAddress.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>SMS Getaway url</p>
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
