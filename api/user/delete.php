@@ -22,8 +22,8 @@
   // $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $user->loginID = $_POST['loginID'];
-  $login->loginID = $_POST['loginID'];
+  $user->loginID = $_GET['loginID'];
+  $login->loginID = $_GET['loginID'];
 
   // Update user
   if($user->delete() && $login->delete()) {

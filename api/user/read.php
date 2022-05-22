@@ -31,6 +31,7 @@
       $User_item = array(
         'username' => $username,
         'role' => $role,
+        'password' => $password,
         'userID' => $userID,
         'loginID' => $loginID,
         'firstName' => $firstName,

@@ -61,7 +61,77 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit User</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="quickForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" name="firstName" class="form-control" id="firstName" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="LastName">Surname</label>
+                                <input type="text" name="LastName" class="form-control" id="LastName" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Email">Email address</label>
+                                <input type="email" name="Email" class="form-control" id="Email" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Contact">Phone</label>
+                                <input type="number" name="Contact" class="form-control" id="Contact" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" name="Address" class="form-control" id="Address" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="">
+                                <input type="hidden" name="loginID" id="loginID">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Role</label>
+                              <select class="form-control select2 listDistrict" style="width: 100%;" name="role">
+                                  <option value="Customer" id="Customer">Customer</option>
+                                  <option value="Admin" id="Admin">Admin</option>
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -98,16 +168,23 @@
     data = data.map((value) =>{
       var delete_url = base_url+'api/user/delete.php?loginID='+value['loginID'];
       return [
-                value['firstName'],
+                value['firstName'] +" "+ value['LastName'],
                 value['Email'],
                 value['Contact'],
                 value['Address'],
                 value['username'],
                 value['role'],
                 `
-                <a href="${value['loginID']}">
-                  <span class="badge bg-warning">Edit</span>
-                </a>
+                <span class="badge bg-warning" onclick="updateData('${value['loginID']}',
+                '${value['firstName']}',
+                '${value['Email']}',
+                '${value['Contact']}',
+                '${value['Address']}',
+                '${value['username']}',
+                '${value['role']}',
+                '${value['password']}',
+                '${value['LastName']}',
+                )" data-toggle="modal" data-target="#modal-default">Edit</span>
                 <span class="badge bg-danger" onclick="deleteData('${delete_url}')">Delete</span>`
             ]
     })
@@ -115,6 +192,20 @@
       data: data
     });
   }
+  function updateData(loginID,firstName,Email,Contact,Address,username,role,password,LastName){
+    $('#loginID').attr('value', loginID);
+    $('#firstName').attr('value',firstName);
+    $('#LastName').attr('value',LastName);
+    $('#Email').attr('value',Email);
+    $('#Contact').attr('value',Contact);
+    $('#Address').attr('value',Address);
+    $('#username').attr('value',username);
+    $('#'+role).attr('selected','selected');
+    $('#password').attr('value',password);
+  
+  }
+  var url ="<?=$_SESSION['base_url']?>api/user/update_user.php";
+  submitFormData(url)
 </script>
 </body>
 </html>

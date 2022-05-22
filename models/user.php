@@ -109,6 +109,40 @@ function console_log($message) {
     }
 
     // Update Post
+      // Create Post
+      public function updateUser() {
+        // Create query
+        $query = 'UPDATE ' . $this->table . ' SET firstName = :firstName, LastName = :LastName, Email = :Email, Address = :Address, Contact = :Contact WHERE loginID = :loginID';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data
+        $this->firstName = htmlspecialchars(strip_tags($this->firstName));
+        $this->LastName = htmlspecialchars(strip_tags($this->LastName));
+        $this->Email = htmlspecialchars(strip_tags($this->Email));
+        $this->Address = htmlspecialchars(strip_tags($this->Address));
+        $this->Contact = htmlspecialchars(strip_tags($this->Contact));
+        $this->loginID = htmlspecialchars(strip_tags($this->loginID));
+
+        // Bind data
+        $stmt->bindParam(':firstName', $this->firstName);
+        $stmt->bindParam(':LastName', $this->LastName);
+        $stmt->bindParam(':Email', $this->Email);
+        $stmt->bindParam(':Address', $this->Address);
+        $stmt->bindParam(':Contact', $this->Contact);
+        $stmt->bindParam(':loginID', $this->loginID);
+
+        // Execute query
+        if($stmt->execute()) {
+          return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+
+    return false;
+  }
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '

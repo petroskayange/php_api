@@ -152,6 +152,32 @@
     }
 
     // Update Post
+    public function updateLogin() {
+      // Create query
+      $query = 'UPDATE ' . $this->table . ' SET username = :username, password = :password, role = :role WHERE loginID = :loginID' ;
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Clean data
+      $this->username = htmlspecialchars(strip_tags($this->username));
+      $this->password = htmlspecialchars(strip_tags($this->password));
+      $this->role = htmlspecialchars(strip_tags($this->role));
+      $this->loginID = htmlspecialchars(strip_tags($this->loginID));
+
+      // Bind data
+      $stmt->bindParam(':username', $this->username);
+      $stmt->bindParam(':password', $this->password);
+      $stmt->bindParam(':role', $this->role);
+      $stmt->bindParam(':loginID', $this->loginID);
+
+      // Execute query
+      $stmt->execute();
+  // Print error if something goes wrong
+  // printf("Error: %s.\n", $stmt->error);
+
+  return false;
+}
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
