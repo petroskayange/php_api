@@ -68,7 +68,7 @@
 
       // Set properties
       $this->referenceNumber = $row['referenceNumber'];
-      $this->PackageStatus = $row['PackageStatus'];
+      $this->PackageStatus = $row['location'];
 }
 
     // Create Post
