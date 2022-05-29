@@ -18,18 +18,19 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Brach Settings</h3>
+                <h3 class="card-title">Frequent Destination Report</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="brach_table" class="table table-bordered table-striped">
+                <table id="deliveryReport" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Branch Name</th>
-                    <th>Action</th>
+                    <th>Destination Name</th>
+                    <th>Number of Parcels</th>
                   </tr>
                   </thead>
                   <tbody>
+                 
                  
                   </tbody>
                 </table>
@@ -58,39 +59,6 @@
 </div>
 <!-- ./wrapper -->
 
-<div class="modal fade" id="modal-default">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Update Location</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="quickForm" >
-        <div class="modal-body">
-          <input type="hidden" name="parcelID" id="parcelID">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                  <label for="exampleInputPassword1">Edit Location</label>
-                  <input type="hidden" name="id" class="form-control" id="id" placeholder="">
-                  <input type="text" name="location" value="" class="form-control" id="branchName" >
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -108,10 +76,6 @@
 <script src="../../plugins/datatables-buttons/js/buttons.php5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- SweetAlert2 -->
-<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-<!-- Toastr -->
-<script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <script src="../../dist/js/backend.js"></script>
@@ -119,48 +83,37 @@
 <!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
-  function updateData(location,id){
-    $('#id').attr('value', id);
-    $('#branchName').attr('value',location);
-  }
-  var url ="<?=$_SESSION['base_url']?>api/branch/update_branch.php";
-  submitFormData(url)
-  var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
+  var url = "<?=$_SESSION['base_url']?>"+"api/notifications/freq_branch.php";
   getData(url,'displayData')
   function displayData(data){
-    console.log(data)
     data = data.map((value) =>{
-      var delete_url = base_url+'api/branch/delete.php?id='+value['id'];
       return [
-                value['name'],
-                `
-                <span class="badge bg-warning" onclick="updateData('${value['name']}','${value['id']}')"
-                 data-toggle="modal" data-target="#modal-default">Edit</span>
-                <span class="badge bg-danger" onclick="deleteData('${delete_url}')">Delete</span>`
-            ]
+                value['data']['location'] ,
+                value['data']['COUNT(*)']
+              ]
     })
-    $('#brach_table').DataTable( {
+    $('#deliveryReport').DataTable( {
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       data: data
-  } );
+  } ).buttons().container().appendTo('#deliveryReport_wrapper .col-md-6:eq(0)');;
   }
- 
 </script>
-<script>
-  // $(function () {
-  //   $("#example1").DataTable({
-  //     "responsive": true, "lengthChange": false, "autoWidth": false,
-  //     "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-  //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  //   $('#example2').DataTable({
-  //     "paging": true,
-  //     "lengthChange": false,
-  //     "searching": false,
-  //     "ordering": true,
-  //     "info": true,
-  //     "autoWidth": false,
-  //     "responsive": true,
-  //   });
-  // });
-</script>
+<!-- <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script> -->
 </body>
 </html>

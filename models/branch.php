@@ -141,18 +141,18 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET PackageStatus = :PackageStatus WHERE parcelID = :parcelID';
+                                SET name = :name WHERE id = :id';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
 
           // Clean data
-          $this->PackageStatus = htmlspecialchars(strip_tags($this->PackageStatus));
-          $this->parcelID = htmlspecialchars(strip_tags($this->parcelID));
+          $this->id = htmlspecialchars(strip_tags($this->id));
+          $this->name = htmlspecialchars(strip_tags($this->name));
 
           // Bind data
-          $stmt->bindParam(':PackageStatus', $this->PackageStatus);
-          $stmt->bindParam(':parcelID', $this->parcelID);
+          $stmt->bindParam(':name', $this->name);
+          $stmt->bindParam(':id', $this->id);
 
           // Execute query
           if($stmt->execute()) {

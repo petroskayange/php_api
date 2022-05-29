@@ -43,7 +43,20 @@
 
       return $stmt;
     }
+ public function freq_branch(){
+   $query = "SELECT location, COUNT(*)
+              FROM notification
+              WHERE location != 'Delivered' && location != 'In Transit'
+              GROUP BY location
+              ORDER BY COUNT(*) DESC LIMIT 4";
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
 
+      // Execute query
+      $stmt->execute();
+
+      return $stmt;
+ }
     // Get Single Post
     public function read_single() {
       // Create query

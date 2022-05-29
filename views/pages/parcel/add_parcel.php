@@ -28,54 +28,66 @@
               <!-- form start -->
               <form id="quickForm" >
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="#">Parcel Name</label>
-                                <input type="text" name="name" class="form-control" name="weight" id="" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Sender Phone</label>
-                                <input type="number" name="sender_phone" class="form-control" name="quantity" id="exampleInputPassword1" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Receiver Phone</label>
-                                <input type="number" name="receiver_phone" class="form-control" name="quantity" id="exampleInputPassword1" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="#">From</label>
-                                <select class="form-control select2 listDistrict" style="width: 100%;" name="from" id="listDistrict">
-                                   
-                                </select>
-                            </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="#">Parcel Name</label>
+                          <input type="text" name="name" class="form-control" name="weight" id="" placeholder="">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="exampleInputPassword1">To</label>
-                              <select class="form-control select2 listDistrict" style="width: 100%;" name="to" id="listDistrict">
-                                  
-                              </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="#">Quantity</label>
-                                <input type="number" name="quantity" class="form-control" id="#" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">description</label>
-                                <input type="text" name="description" class="form-control" id="exampleInputPassword1" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="#">Weight</label>
-                                <input type="number" name="weight" class="form-control" id="#" placeholder="KG">
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">description</label>
+                          <input type="text" name="description" class="form-control" id="exampleInputPassword1" placeholder="">
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="#">Weight</label>
+                          <input type="number" step="0.01" name="weight" class="form-control" id="#" placeholder="KG">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Receiver Phone</label>
+                        <input type="number" name="receiver_phone" class="form-control" name="quantity" id="exampleInputPassword1" placeholder="">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Sender Phone</label>
+                        <input type="number" name="sender_phone" class="form-control" name="quantity" id="exampleInputPassword1" placeholder="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="#">From</label>
+                          <select class="form-control select2 listDistrict" style="width: 100%;" name="from" id="listDistrict">
+                              
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="exampleInputPassword1">To</label>
+                          <select class="form-control select2 listDistrict" style="width: 100%;" name="to" id="listDistrict">
+                              
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="#">Quantity</label>
+                          <input type="number" name="quantity" class="form-control" id="#" placeholder="">
+                      </div>
+                    </div>
+                  </div>
                 </div>
        
                 <!-- /.card-body -->

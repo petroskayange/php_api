@@ -136,6 +136,24 @@
                   <p>Payment Report</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?=$_SESSION['base_url']?>views/pages/reports/frequent_customer.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Frequent Customer</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=$_SESSION['base_url']?>views/pages/reports/frequent_destination.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Frequent Destination</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=$_SESSION['base_url']?>views/pages/reports/amount_report.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Amount Report</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-header">Administrator</li>

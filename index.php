@@ -23,12 +23,16 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=$_SESSION['base_url']?>views/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background:#f32800">
+<!-- #d7d7d7 !important -->
   <?php 
   if(isset($_GET['logout'])){
     if($_GET['logout'] == 'logout')
       $_SESSION['login_status'] ="";
   }
+  // freq customer
+  // freq destnestion
+  // amount report
   if(!empty($_SESSION['login_message'])){?>
   <div class="alert alert-danger alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -64,12 +68,12 @@
         </div>
         <div class="row">
           <div class="col-4">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-             
-            </div>
+            <a href="<?=$_SESSION['base_url']?>register_admin.php">
+                <span class="">Register</span>
+            </a>
           </div>
           <!-- /.col -->
+          
           <div class="col-4">
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>

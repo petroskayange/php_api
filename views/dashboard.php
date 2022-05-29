@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box " style="background-color:#d7d7d7">
               <div class="inner">
                 <h3 id="totalUsers"></h3>
 
@@ -40,7 +40,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box " style="background-color:#d7d7d7">
               <div class="inner">
                 <h3 id="totalParcel"></h3>
 
@@ -55,7 +55,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box" style="background-color:#d7d7d7">
               <div class="inner">
                 <h3 id="totalCustomers"></h3>
 
@@ -70,16 +70,16 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box" style="background-color:#d7d7d7">
               <div class="inner">
-                <h3>7</h3>
+                <h3 id="totalLocation"></h3>
 
                 <p>Total Locations</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="<?=$_SESSION['base_url']?>views/pages/location/manage_location.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?=$_SESSION['base_url']?>views/pages/system_settings/brach_settings.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -125,7 +125,11 @@
   function countParcels(data){
     $('#totalParcel').html(data.length)
   }
-
+  var url = "<?=$_SESSION['base_url']?>"+"api/branch/read.php";
+  getData(url,'displayLocation')
+  function displayLocation(data){
+    $('#totalLocation').html(data.length)
+  }
   // var url = "api/parcel/read.php";
   // getData(url,'countParcels')
   // function countParcels(data){
